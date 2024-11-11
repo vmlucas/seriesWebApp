@@ -23,7 +23,6 @@ export class SerieEngineService {
     if (ano) {
         params = params.set('ano', ano.toString());
     }*/
-    console.log(this.authAPIKey); 
     return this.http.get<Serie[]>(`/buscarSeries?status=${value}&ano=${ano}`);
     
   }
