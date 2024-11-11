@@ -1,0 +1,79 @@
+<div class="col-md-6">
+    <table >
+      <tr style="border-bottom: 1px solid var(--silver);">
+           <td><h2>Séries</h2></td>
+      </tr>
+    </table>
+    <hr>
+    <div class="submit-form">
+      @if (!submitted) {                
+      <div class="form-group">
+        <table class="table table-striped table-sm">
+            <tr >
+              <td><label for="seriesName">Nome Nova série</label></td>
+              <td><input 
+                  type="text"
+                  class="form-control"
+                  id="seriesName"
+                  required
+                  [(ngModel)]="serie.seriesName"
+                  name="seriesName" /></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--silver);">
+                <td><label for="season">Season</label></td>
+                <td><input
+                      class="form-control"
+                      id="season"
+                      required
+                      [(ngModel)]="serie.season"
+                      name="season" /></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--silver);">
+                <td><label for="provider">Provider</label></td>
+                <td><input
+                      class="form-control"
+                      id="provider"
+                      required
+                      [(ngModel)]="serie.provider"
+                      name="provider" /></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--silver);">
+                <td><label for="app">App</label></td>
+                <td><input
+                      class="form-control"
+                       id="app"
+                       required
+                       [(ngModel)]="serie.app"
+                        name="app" /></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--silver);">
+                <td><label for="status">Status</label></td>
+                <td><input
+                        class="form-control"
+                        id="status"
+                        required
+                        [(ngModel)]="serie.status"
+                        name="status" /></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--silver);">
+               <td><label for="year">Ano</label></td>
+               <td><input
+                     type="text"
+                     class="form-control"
+                     id="year"
+                     required
+                     [(ngModel)]="serie.year"
+                     name="year" /></td>
+            </tr>  
+            <tr style="border-bottom: 1px solid var(--silver);">
+                <td colspan="2"><button (click)="saveSerie()" class="btn btn-success">Salvar</button></td>
+            </tr>
+        </table>  
+    </div>  
+                } @else {
+                <h4>Serie foi Adicionada com sucesso!</h4>
+                <button class="btn btn-success" (click)="newSerie()">Adicionar</button>
+                }
+            
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="col-md-6">
+    <h4>Dados Consolidados</h4>
+    <hr>
+    <label style="font-size: medium;font-weight: bold;">Series Assistidas por Ano:</label>
+    <table >
+        <tr style="border-bottom: 1px solid var(--silver);font-size: medium;">
+          <td>    </td>
+          <td>Providers</td>
+          <td>
+            <select name="tiposControl" (change)="onChange($event)" style="font-size: small;">
+                <option disabled>Please Select</option>
+                <option *ngFor="let provider of providers" [value]="provider">{{provider}}</option>
+            </select>
+          </td>
+          </tr>
+    </table>
+    @if ( consolidados.length > 0 ){
+    <hr>
+    <table class="table table-striped table-sm">
+      <thead>
+          <tr style="border-bottom: 1px solid var(--silver);font-size: small;">
+          <th>Ano</th>
+          <th>Provider</th>
+          <th>Qtd assistida</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (consolidado of consolidados;track consolidado.ano; let i = $index) {
+          <tr style="border-bottom: 1px solid var(--silver);font-size: small;">
+            <td>{{ consolidado.ano }}</td>
+            <td>{{ consolidado.provider }}</td>
+            <td>{{ consolidado.totalSeries }}</td>
+          </tr>
+      
+        }
+      </tbody>
+    </table>    
+    }    
+</div>
+@if ( consolidados ){
+<div>
+      <canvas #chart baseChart 
+                [data]="dChartData"
+                [type]="dChartType"
+                (chartClick)="chartClicked($event)">
+    </canvas>
+</div>
+}
+    
+    
+  
+  

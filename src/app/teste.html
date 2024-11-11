@@ -1,0 +1,136 @@
+
+<div>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Series Web App</a>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Buscar por nome" aria-label="Search" (click)="searchSerie($event)">
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign out</a>
+          </li>
+        </ul>
+    </nav>
+  
+    <div class="container-fluid">
+        <div class="row">
+          <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">
+                    <span data-feather="home"></span>
+                    Dashboard <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="file"></span>
+                    Orders
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="shopping-cart"></span>
+                    Products
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="users"></span>
+                    Customers
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="bar-chart-2"></span>
+                    Reports
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="layers"></span>
+                    Integrations
+                  </a>
+                </li>
+              </ul>
+  
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Saved reports</span>
+                <a class="d-flex align-items-center text-muted" href="#">
+                  <span data-feather="plus-circle"></span>
+                </a>
+              </h6>
+              <ul class="nav flex-column mb-2">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Current month
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Last quarter
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Social engagement
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Year-end sale
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+  
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <h2>Series</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-sm">
+                <tr>
+                  <td>Buscar Series por Status</td>
+                <td>
+                    <select name="statusControl" (change)="onChange($event)">
+                        <option disabled>Please Select</option>
+                        <option *ngFor="let option of options" [value]="option">{{option}}</option>
+                    </select>
+                </td>
+                </tr>
+            </table>
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Season</th>
+                  <th>Provider</th>
+                  <th>App</th>
+                  <th>Status</th>
+                  <th>Ano</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <ng-container *ngFor="let serie of series">
+                  <tr>  
+                    <td>{{ serie.seriesName }}</td>
+                    <td>{{ serie.season }}</td>
+                    <td>{{ serie.provider }}</td>
+                    <td>{{ serie.app }}</td>
+                    <td>{{ serie.status }}</td>
+                    <td>{{ serie.year }}</td>
+                  </tr>
+                  </ng-container>
+                
+              </tbody>
+            </table>        
+            </div>
+          </main>
+        </div>
+    </div>
+  </div>
+  

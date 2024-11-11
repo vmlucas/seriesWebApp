@@ -1,0 +1,122 @@
+<div class="col-md-6">
+    <table >
+      <tr style="border-bottom: 1px solid var(--silver);">
+           <td><h2>Séries</h2></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--silver);">
+        <td><input class="form-control form-control-dark w-100" type="text" style="font-size: small;"
+             placeholder="Buscar Série por nome" aria-label="Search" (click)="searchSerie($event)"></td>
+        <td>    </td>
+        <td>Status</td>
+        <td>
+          <select name="statusControl" (change)="onChange($event)" style="font-size: small;">
+              <option disabled>Please Select</option>
+              <option *ngFor="let option of options" [value]="option">{{option}}</option>
+          </select>
+        </td>
+      <td></td>
+      <td>Ano</td>
+        <td>
+          <select name="statusControl" [(ngModel)]="ano" style="font-size: small;">
+              <option disabled>Please Select</option>
+              <option *ngFor="let ano of anos" [value]="ano">{{ano}}</option>
+          </select>
+        </td>
+      <td></td>
+      </tr>
+  </table>
+  <hr>
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Season</th>
+        <th>Provider</th>
+        <th>App</th>
+        <th>Status</th>
+        <th>Ano</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (serie of series; track serie.id; let i = $index) {
+        <tr>  
+          <td><a [class.active]="i == currentIndex" data-toggle="collapse" href="#collapse{{i}}"
+            (click)="setActiveSerie(serie, i)" >{{ serie.seriesName }}</a> 
+          </td>
+          <td>{{ serie.season }}</td>
+          <td>{{ serie.provider }}</td>
+          <td>{{ serie.app }}</td>
+          <td>{{ serie.status }}</td>
+          <td>{{ serie.year }}</td>
+        </tr>
+        <tr id="collapse{{i}}" class="panel-collapse collapse"><td>
+          @if (currentSerie.id){
+            <table class="table table-sm">
+              <tr >
+                <td><label for="seriesName">Nome da série</label></td>
+                <td><label>{{ currentSerie.seriesName }}</label></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--silver);">
+                  <td><label for="season">Season</label></td>
+                  <td><input
+                        class="form-control"
+                        id="season"
+                        required
+                        [(ngModel)]="currentSerie.season"
+                        name="season" /></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--silver);">
+                  <td><label for="provider">Provider</label></td>
+                  <td><input
+                        class="form-control"
+                        id="provider"
+                        required
+                        [(ngModel)]="currentSerie.provider"
+                        name="provider" /></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--silver);">
+                  <td><label for="app">App</label></td>
+                  <td><input
+                        class="form-control"
+                         id="app"
+                         required
+                         [(ngModel)]="currentSerie.app"
+                          name="app" /></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--silver);">
+                  <td><label for="status">Status</label></td>
+                  <td><input
+                          class="form-control"
+                          id="status"
+                          required
+                          [(ngModel)]="currentSerie.status"
+                          name="status" /></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--silver);">
+                 <td><label for="year">Ano</label></td>
+                 <td><input
+                       type="text"
+                       class="form-control"
+                       id="year"
+                       required
+                       [(ngModel)]="currentSerie.year"
+                       name="year" /></td>
+              </tr>  
+              <tr style="border-bottom: 1px solid var(--silver);">
+                  <td colspan="2"><button (click)="updateSerie()" class="btn btn-success">Atualizar</button></td>
+              </tr>
+          </table>  
+          }@else {
+            <table class="table table-sm">
+              <tr>
+                <td colspan="2">{{ message }}</td>
+              </tr>
+            </table>  
+          }   
+           </td>                                        
+        </tr>
+      }
+    </tbody>
+  </table>        
+  </div>
+  
