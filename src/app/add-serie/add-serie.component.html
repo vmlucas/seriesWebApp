@@ -56,6 +56,15 @@
                         name="status" /></td>
             </tr>
             <tr style="border-bottom: 1px solid var(--silver);">
+                <td><label for="status">imdbId</label></td>
+                <td><input
+                        class="form-control"
+                        id="imdbId"
+                        required
+                        [(ngModel)]="serie.imdbId"
+                        name="imdbId" /></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--silver);">
                <td><label for="year">Ano</label></td>
                <td><input
                      type="text"

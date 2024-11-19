@@ -4,6 +4,7 @@ import { finalize, Observable } from 'rxjs';
 import { Serie } from './serie.model';
 import { Consolidado } from './consolidado';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,7 @@ export class SerieEngineService {
   constructor(private http: HttpClient) { }
 
   
-  findSeries(value:string, ano:number): Observable<Serie[]>{
+  findSeries(value:string, ano:number, pageNUmber:number): Observable<any>{
     /*let params = new HttpParams();
 
     if (status) {
@@ -23,16 +24,18 @@ export class SerieEngineService {
     if (ano) {
         params = params.set('ano', ano.toString());
     }*/
-    return this.http.get<Serie[]>(`/buscarSeries?status=${value}&ano=${ano}`);
+    
+    return this.http.get<any>(`/buscarSeries?status=${value}&ano=${ano}&pageNo=${pageNUmber}&pageSize=10`);
     
   }
 
   //buscarSerie?nome=casa
-  findSerie(nome:string): Observable<Serie[]>{
+  findSerie(nome:string): Observable<any>{
     
-    return this.http.get<Serie[]>(`/buscarSerie?nome=${nome}`);
+    return this.http.get<any>(`/buscarSerie?nome=${nome}`);
   }
 
+  
   createSerie(serie: Serie): Observable<Serie> {
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       return this.http.post<any>(`/insertSerie?key=${this.authAPIKey}`, serie, { headers });

@@ -18,7 +18,8 @@ export class AddSerieComponent {
     season: '',
     provider: '',
     app: '',
-    status: ''
+    status: '',
+    imdbId:''
   };
   submitted = false;
 
@@ -31,7 +32,8 @@ export class AddSerieComponent {
 		  season: this.serie.season,
 		  provider: this.serie.provider,
 		  app: this.serie.app,
-		  status: this.serie.status
+		  status: this.serie.status,
+      imdbId: this.serie.imdbId
     };
 
     this.serieEngineService.createSerie(data)
@@ -51,7 +53,8 @@ export class AddSerieComponent {
     season: '',
     provider: '',
     app: '',
-    status: ''
+    status: '',
+    imdbId:''
     };
   }
 

@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { SerieEngineService } from '../serie-engine.service';
 import { Observable } from 'rxjs';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-series-list',
@@ -14,7 +15,7 @@ import { Observable } from 'rxjs';
     RouterOutlet,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,SpinnerComponent],
   templateUrl: './series-list.component.html',
   styleUrl: './series-list.component.css'
 })
@@ -25,17 +26,23 @@ export class SeriesListComponent implements OnInit{
   currentIndex = -1;
   message='';
   ano=2024
+  status='Watching';
+  page=0;
   // options array
   options: string[] = ['Watching', 'Watched', 'Waiting', 'Abandoned'];
   anos: number[] = [2015,2016,2017,2018,2019,2020,2021,2022,2023,2024]
+  isLoading=false;
+
   constructor(private engine:SerieEngineService, private http: HttpClient) {
     
   }
 
   ngOnInit() {
-    this.engine.findSeries("Watching",this.ano).subscribe({
+    this.isLoading=true;
+    this.engine.findSeries(this.status,this.ano,this.page).subscribe({
       next: (data) => {
-        this.series = data;
+        this.series = data.content;
+        this.isLoading = false;
       },
       error: (e) => console.error(e)
     });
@@ -43,11 +50,51 @@ export class SeriesListComponent implements OnInit{
 
   
   onChange(e:any){
+    this.series = [];
+    this.isLoading=true;
     this.currentSerie = {};
     this.message = '';
-    this.engine.findSeries(e.target.value,this.ano).subscribe({
+    this.status = e.target.value;
+    this.page=0;
+    this.engine.findSeries(this.status,this.ano,this.page).subscribe({
       next: (data) => {
-        this.series = data;
+        this.series = data.content;
+        this.isLoading=false;
+      },
+      error: (e) => console.error(e)
+    });
+    
+  }
+
+  nextPage(): void{
+    this.series = [];
+    this.isLoading=true;
+    this.currentSerie = {};
+    this.message = '';
+    this.page=this.page+1;
+    this.engine.findSeries(this.status,this.ano,this.page).subscribe({
+      next: (data) => {
+        this.series = data.content;
+        this.isLoading=false;
+      },
+      error: (e) => console.error(e)
+    });
+    
+  }
+
+  prevPage(): void{
+    this.series = [];
+    this.isLoading=true;
+    this.currentSerie = {};
+    this.message = '';
+    this.page=this.page-1;
+    if(this.page < 0){
+      this.page = 0;
+    }
+    this.engine.findSeries(this.status,this.ano,this.page).subscribe({
+      next: (data) => {
+        this.series = data.content;
+        this.isLoading=false;
       },
       error: (e) => console.error(e)
     });
@@ -55,6 +102,8 @@ export class SeriesListComponent implements OnInit{
   }
 
   searchSerie(e:any){    
+    this.series = [];
+    this.isLoading=true;
     this.currentSerie = {};
     this.message = '';
     if(e.target.value != '')
@@ -62,6 +111,7 @@ export class SeriesListComponent implements OnInit{
       this.engine.findSerie(e.target.value).subscribe({
         next: (data) => {
           this.series = data;
+          this.isLoading=false;
         },
         error: (e) => console.error(e)
       });
@@ -69,10 +119,11 @@ export class SeriesListComponent implements OnInit{
   }
 
   setActiveSerie(serie: Serie, index: number): void {
+    this.message = '';
     this.currentSerie = serie;
     this.currentIndex = index;
   }
-
+ 
   updateSerie(): void {
     this.message = '';
     console.log(this.currentSerie);
