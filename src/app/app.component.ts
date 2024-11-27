@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { Serie } from './serie.model';
 import { SerieEngineService } from './serie-engine.service';
-
+ 
 @Component({
   selector: 'app-root',
   standalone: true,

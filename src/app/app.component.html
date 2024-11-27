@@ -21,12 +21,26 @@
               </li>
               <li class="nav-item">
                 <a routerLink="/add" routerLinkActive="active" class="nav-link active">
-                  <i class="bi bi-file-earmark-ruled"></i>Cadastrar Série Nova </a>
+                  <i class="bi bi-clipboard-plus-fill"></i>Cadastrar Série Nova </a>
               </li>
               <li class="nav-item">
-                <a routerLink="/consolidado" routerLinkActive="active" class="nav-link active">
-                  <i class="bi bi-file-earmark-ruled"></i>Dados Consolidados</a>
-              </li>
+                <a data-toggle="collapse" href="#collapsedash" class="nav-link active">
+                     <i class="bi bi-graph-up"></i>Dashboards</a>
+                   <table>
+                   <tr id="collapsedash" class="panel-collapse collapse">
+                      <td>   
+                        <a routerLink="/consolidadoAno" routerLinkActive="active" class="nav-link active">
+                          <i class="bi bi-file-earmark-ruled"></i>Total Consolidado </a>
+                      </td>
+                   </tr>   
+                   <tr id="collapsedash" class="panel-collapse collapse">
+                    <td>   
+                      <a routerLink="/consolidado" routerLinkActive="active" class="nav-link active">
+                        <i class="bi bi-file-earmark-ruled"></i>Total Consolidado por Série </a>
+                    </td>
+                 </tr>  
+                  </table>
+              </li> 
             </ul>
           </div>
         </nav>

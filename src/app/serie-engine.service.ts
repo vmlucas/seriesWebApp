@@ -55,7 +55,12 @@ export class SerieEngineService {
     return this.http.get<Consolidado[]>(`/consolidadoQtdAno`);
   }
    
-  consolidadoQtdProviderAno(provider:string):Observable<Consolidado[]>{ 
+  consolidadoQtdProviderAno():Observable<Consolidado[]>{ 
+    
+    return this.http.get<Consolidado[]>(`/consolidadoQtdProviderAno`);
+  }
+
+  consolidadoQtdProviderAnoFilter(provider:string):Observable<Consolidado[]>{ 
     
     return this.http.get<Consolidado[]>(`/consolidadoQtdProviderAno?provider=${provider}`);
   }
